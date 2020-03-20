@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào? · Test Site</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên trong dự án là thực sự cần thiết. Trong bài viết này tôi sẽ chia sẻ với các bạn cách mà tôi đã làm với các dự án của mình."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào? · Test Site"/><meta property="og:type" content="website"/><meta property="og:url" content="https://hieu-nv.github.io/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao"/><meta property="og:description" content="Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên trong dự án là thực sự cần thiết. Trong bài viết này tôi sẽ chia sẻ với các bạn cách mà tôi đã làm với các dự án của mình."/><meta property="og:image" content="https://hieu-nv.github.io/posts/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://hieu-nv.github.io/posts/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/posts/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://hieu-nv.github.io/posts/blog/atom.xml" title="Test Site Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://hieu-nv.github.io/posts/blog/feed.xml" title="Test Site Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/posts/js/scrollSpy.js"></script><link rel="stylesheet" href="/posts/css/main.css"/><script src="/posts/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/posts/"><img class="logo" src="/posts/img/favicon.ico" alt="Test Site"/><h2 class="headerTitleWithLogo">Test Site</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/posts/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/posts/docs/doc4" target="_self">API</a></li><li class=""><a href="/posts/help" target="_self">Help</a></li><li class="siteNavGroupActive"><a href="/posts/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao">[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao">[React] Sử dụng mẫu container trong React như thế nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua">[AWS] Lambda và DynamoDB Streams không còn khó nữa!</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao">[React] Tôi đã làm toast component như thế nào?</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao">[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao">[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?</a></h1><p class="post-meta">March 11, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><div><span><p>Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên trong dự án là thực sự cần thiết. Trong bài viết này tôi sẽ chia sẻ với các bạn cách mà tôi đã làm với các dự án của mình.</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/12232802/render1584030034324.gif" alt="docker-compose up -d"></p>
+<h2><a class="anchor" aria-hidden="true" id="tại-sao-lại-sử-dụng-docker"></a><a href="#tại-sao-lại-sử-dụng-docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tại sao lại sử dụng <code>docker</code>?</h2>
+<p>Chia sẻ qua một chút về quá trình trước khi tôi sử dụng docker trong các dự án của mình. Năm 2014, tôi bắt đầu xây dựng môi trường phát triển cho dự án sử dụng <a href="https://www.vagrantup.com/">vargrant</a>. Với vargrant tôi đã có thể đóng gói các dịch vụ được sử dụng trong dự án và chia sẻ với các thành viên trong dự án. Nhưng bạn biết không dự án có sử dụng PostgreSQL và Couchbase, khi đó tôi đã tạo 2 máy ảo vagrant cho các dịch vụ này. Bạn biết đấy, vargrant sẽ tạo ra một máy ảo hoàn chỉnh và sau đó tôi cài các dịch vụ tôi cần sử dụng lên đó. Nó thực sự là vấn đề với chiếc PC của tôi :). Ngoài ra bạn sẽ gặp khó khăn trong việc kết nối các máy ảo này với nhau nữa, bạn cần setting sao cho chúng ở cùng một mạng riêng.</p>
+<p>Khi sử dụng <code>docker</code> thì sao? Với mỗi dịch vụ bạn tạo ra một container riêng giống như một máy ảo <code>vargrant</code> tôi đã tạo ở trên. Nhưng điểm khác biệt là gì?</p>
+<ul>
+<li><p>Với <code>docker</code> bạn không cần lo lắng về vấn đề cài dịch vụ nữa. Nó đã tự động làm việc đó rồi.</p></li>
+<li><p><code>docker</code> không tạo ra một máy ảo hoàn chỉnh với các dịch vụ thừa trong đó. Nó đơn giản tạo ra một môi trường đủ để bạn chạy dịch vụ của mình.</p></li>
+<li><p>Việc cấu hình mạng riêng và chuyển tiếp cổng vào container cũng được được thiết lập dễ dàng hơn.</p></li>
+</ul>
+<p>Với chừng đó lý do là đủ để tôi chuyến sang sử dụng docker rồi :)</p>
+<h2><a class="anchor" aria-hidden="true" id="tôi-đã-quản-lý-container-bằng-docker-như-thế-nào"></a><a href="#tôi-đã-quản-lý-container-bằng-docker-như-thế-nào" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tôi đã quản lý container bằng docker như thế nào?</h2>
+<p>Để quản lý container tôi sử dụng <a href="https://docs.docker.com/compose/">Docker Compose</a>, công cụ này có sẵn khi bạn cài <a href="">Docker Desktop</a></p>
+<ul>
+<li><a href="https://docs.docker.com/docker-for-mac/">Docker Desktop for MacOS</a></li>
+<li><a href="https://docs.docker.com/docker-for-windows/">Docker Desktop for Windows</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="cấu-hình-container"></a><a href="#cấu-hình-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cấu hình container</h3>
+<ul>
+<li>Sử dụng <code>docker-compose.yml</code> để cấu hình các dịch vụ bạn muốn sử dụng trong ứng dụng</li>
+</ul>
+<p>Trong phạm vi bài viết này tôi sẽ cấu hình để tạo ra hai container cho các dịch vụ MySQL và DynamoDB.</p>
+<p><code>docker-compose.yml</code></p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">'3'</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">mysql:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">mysql:5.7.26</span>
+    <span class="hljs-comment"># set hostname để bạn có thể access vào container bằng tên này</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">mysql</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-comment"># Cấu hình forward port từ host vào docker container</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">'3306:3306'</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-comment"># Cấu hình thư mục chưa schema bạn muốn import vào MySQL</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./mysql/initdb.d:/docker-entrypoint-initdb.d</span>
+      <span class="hljs-comment"># mount thư mục MySQL data để có thể backup dữ liệu nếu cần</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./mysql/data:/var/lib/mysql</span>
+      <span class="hljs-comment"># Các cấu hình bạn cần thay đổi cho dịch vụ MySQL</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./mysql/conf.d/my.cnf:/etc/mysql/my.cnf</span>
+      <span class="hljs-comment"># mount thư mục log để trace lỗi nếu cần</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./mysql/log:/var/log/mysql</span>
+    <span class="hljs-comment"># các biến môi trường sử dụng qua tham số -e khi run container hoặc cấu hình trong .env như bên dưới</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-comment"># set mật khẩu cho tài khoản root</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD</span>
+      <span class="hljs-comment"># tên database bạn muốn tạo sau khi container được khởi động</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MYSQL_DATABASE=$DB_DATABASE</span>
+      <span class="hljs-comment"># tạo thêm một user mới với tên được cấu hình trong $MYSQL_USER</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MYSQL_USER=$DB_USER</span>
+      <span class="hljs-comment"># set mật khẩu cho user được tạo ở trên</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MYSQL_PASSWORD=$DB_PASSWORD</span>
+
+  <span class="hljs-attr">dynamodb:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">amazon/dynamodb-local</span>
+    <span class="hljs-comment"># set hostname để bạn có thể access vào container bằng tên này</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">dynamodb</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-comment"># Cấu hình forward port từ host vào docker container</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">'8000:8000'</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-comment"># mount thử mục data của DynamoDB để có thể backup</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./dynamodb/data:/home/dynamodblocal/data</span>
+    <span class="hljs-attr">entrypoint:</span> <span class="hljs-string">java</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">'-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data'</span>
+</code></pre>
+<ul>
+<li>Set các biến môi trường bằng <code>.env</code></li>
+</ul>
+<p>Tại thư mục chưa <code>docker-compose.yml</code> bạn tạo <code>.env</code> như sau:</p>
+<p><code>.env</code></p>
+<pre><code class="hljs css language-env"><span class="hljs-attr">DB_ROOT_PASSWORD</span>=hieunv@<span class="hljs-number">123456</span>
+<span class="hljs-attr">DB_DATABASE</span>=test
+<span class="hljs-attr">DB_USER</span>=hieunv
+<span class="hljs-attr">DB_PASSWORD</span>=hieunv@<span class="hljs-number">123456</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="khởi-động-các-dịch-vụ"></a><a href="#khởi-động-các-dịch-vụ" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Khởi động các dịch vụ</h3>
+<p>Bạn sử dụng <code>docker-compose</code> để khởi động các dịch vụ như đã cấu hình ở trên</p>
+<pre><code class="hljs css language-bash">docker-compose up -d
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="xoá-các-container"></a><a href="#xoá-các-container" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Xoá các container</h3>
+<p>Khi bạn không muốn sử dụng container nữa hoặc khi có lỗi container mà bạn muốn tạo lại thì có thể xoá nhanh các container đã tạo bằng lệnh sau:</p>
+<pre><code class="hljs css language-bash">docker-compose down -v
+</code></pre>
+<p>Cám ơn các bạn đã theo dõi bài viết. Hy vọng sau bài viết này các bạn sẽ sử dụng Docker trong dự án của mình.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/posts/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tại-sao-lại-sử-dụng-docker">Tại sao lại sử dụng <code>docker</code>?</a></li><li><a href="#tôi-đã-quản-lý-container-bằng-docker-như-thế-nào">Tôi đã quản lý container bằng docker như thế nào?</a><ul class="toc-headings"><li><a href="#cấu-hình-container">Cấu hình container</a></li><li><a href="#khởi-động-các-dịch-vụ">Khởi động các dịch vụ</a></li><li><a href="#xoá-các-container">Xoá các container</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/posts/" class="nav-home"><img src="/posts/img/favicon.ico" alt="Test Site" width="66" height="58"/></a><div><h5>Docs</h5><a href="/posts/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/posts/docs/en/doc2.html">Guides (or other categories)</a><a href="/posts/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/posts/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/posts/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/posts/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>

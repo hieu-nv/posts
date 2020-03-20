@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>[React] Class Component và Function Component, bạn chọn viết theo cách nào? · Test Site</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="[React] Class Component và Function Component, bạn chọn viết theo cách nào? · Test Site"/><meta property="og:type" content="website"/><meta property="og:url" content="https://hieu-nv.github.io/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao"/><meta property="og:description" content="Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé."/><meta property="og:image" content="https://hieu-nv.github.io/posts/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://hieu-nv.github.io/posts/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/posts/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://hieu-nv.github.io/posts/blog/atom.xml" title="Test Site Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://hieu-nv.github.io/posts/blog/feed.xml" title="Test Site Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/posts/js/scrollSpy.js"></script><link rel="stylesheet" href="/posts/css/main.css"/><script src="/posts/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/posts/"><img class="logo" src="/posts/img/favicon.ico" alt="Test Site"/><h2 class="headerTitleWithLogo">Test Site</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/posts/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/posts/docs/doc4" target="_self">API</a></li><li class=""><a href="/posts/help" target="_self">Help</a></li><li class="siteNavGroupActive"><a href="/posts/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao">[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao">[React] Sử dụng mẫu container trong React như thế nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua">[AWS] Lambda và DynamoDB Streams không còn khó nữa!</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao">[React] Tôi đã làm toast component như thế nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao">[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao">[React] Class Component và Function Component, bạn chọn viết theo cách nào?</a></h1><p class="post-meta">March 6, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><div><span><p>Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé.</p>
+<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p>
+<h2><a class="anchor" aria-hidden="true" id="cú-pháp"></a><a href="#cú-pháp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cú pháp</h2>
+<p>Khác nhau đầu tiên giữa <code>Class Component</code> và <code>Function Component</code> thể hiện ngay ở cách khai báo.</p>
+<h3><a class="anchor" aria-hidden="true" id="class-component"></a><a href="#class-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-comment">// phương pháp này bắt buộc phải khai báo hàm để kết xuất mã HTML</span>
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<p>Cách khai báo này khá quen thuộc với các bạn có nền tảng lập trình hướng đối tượng (OOP). Với những bạn mới học React hoặc chuyển sang học React thì phương pháp tiếp cận này có vẻ phù hợp và dễ hiểu.</p>
+<h3><a class="anchor" aria-hidden="true" id="function-component"></a><a href="#function-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// phương pháp xem kết xuất mã HTML như là giá trị trả về của hàm</span>
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Function component sử dụng cách tiếp cận khác đó là sử dụng pure function để khai báo component. Ban đầu function component được sử dụng để viết các component chỉ với mục đích kết xuất HTML mà thôi. Với các component với theo hướng tiếp cận này thì bạn sẽ không can thiệp được vào lifecycle của component. Do đó nó thướng được biết đến với tên gọi Stateless Component.</p>
+<h2><a class="anchor" aria-hidden="true" id="props"></a><a href="#props" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Props</h2>
+<h3><a class="anchor" aria-hidden="true" id="class-component-1"></a><a href="#class-component-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<p><code>props</code> trong Class Component được xem như giá trị truyển vào cho hàm khởi tạo class.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props); <span class="hljs-comment">// bắt buộc phải có dòng này để gọi hàm khởi tạo của class cha nhé</span>
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="function-component-1"></a><a href="#function-component-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<p><code>props</code> trong Function Component thì được xem như là giá trị truyền vào hàm pure function khi định nghĩa component.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params">props</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Định nghĩa <code>defaultProps</code> và <code>propTypes</code> thì không có sự khác biệt giữa Class Component và Function Component.</p>
+<pre><code class="hljs css language-js">TestComponent.defaultProps = {};
+
+TestComponent.propTypes = {};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="state"></a><a href="#state" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>State</h2>
+<p>Trước khi React Hooks ra đời thì như đã nói ở trên Function Component con được biết đến với tên gọi Stateless Component. Nghĩa là nó không có state. Khi React Hooks ra đời thì Function Component cũng có <code>state</code> của riêng nó.</p>
+<h3><a class="anchor" aria-hidden="true" id="class-component-2"></a><a href="#class-component-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<p><code>state</code> trong Class Component dược định nghĩa như sau:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-comment">// khởi tạo giá trị state</span>
+    <span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">false</span> };
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<p>Khi muốn thay đổi giá trị <code>state</code> bạn gọi phương thức <code>setState</code> của component:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">this</span>.setState(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> ({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">true</span> }));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="function-component-2"></a><a href="#function-component-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<p><code>state</code> trong Function Component được định nghĩa như sau:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params">props</span>) </span>{
+  <span class="hljs-comment">// giá trị khởi tạo state được truyền vào trong useState hook</span>
+  <span class="hljs-keyword">const</span> [state, setState] = useState({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">false</span> });
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Các bạn để ý hàm <code>useState</code> trả về giá trị của component <code>state</code> trong biến <code>state</code> và hàm <code>setState</code>. Khi muốn thay đổi giá trị của state thì bạn có thể gọi hàm <code>setState</code>.</p>
+<pre><code class="hljs css language-js">setState({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">true</span> });
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="component-lifecycle"></a><a href="#component-lifecycle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Component Lifecycle</h2>
+<p>Với Class component các bạn sẽ thấy component lifecycle khá rõ ràng với các hàm như <code>componentDidMount</code>, <code>componentDidUpdate</code>. Function Component thì không như vậy, toàn bộ việc sử lý lifecycle đều thông qua <code>useEffect</code> hook.</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// componentDidMount</span>
+useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}; <span class="hljs-comment">// componentWillUnmount</span>
+}, []);
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// componentDidUpdate</span>
+useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}; <span class="hljs-comment">// componentWillUnmount</span>
+}, [state]);
+</code></pre>
+<p>Như các bạn thấy thì <code>componentDidMount</code> và <code>componentDidUpdate</code> không chỉ định rõ khi nào thì hàm được gọi. Việc gọi hàm thì tự chúng ta hiểu dựa theo lifecycle của React component thôi. Với Function Component và <code>useEffect</code> thì khác, bạn có thể thấy <code>[]</code> và <code>[state]</code> chị định rõ ràng đối tượng phụ thuộc mà khi chúng thay đổi thì hàm truyển vào <code>useEffect</code> sẽ được gọi. Có vẻ như nó lại tường mình hơn là các hàm lifecycle trong class Component.</p>
+<p>Sau sự có mặt của TypeScript thì có lẽ Class Component và React Hooks thì có lẽ bạn Class Component chiếm ưu thế tuyệt đối. Thời điểm đó anh em thi nhau viết Class Component với TypeScript và tôi cũng thế :). Ngay đến cả facebook cũng support TypeScript với create-react-app nữa cơ mà. Thế nhưng khi React Hooks xuất hiện thì có vẻ gió đã đổi chiều, việc xử lý state và lifecycle với hook có vẻ đơn giản hơn rất nhiều. Các bạn thì thấy thế nào. Bạn sẽ chọn cách nào với dự án của mình?</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/posts/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#cú-pháp">Cú pháp</a><ul class="toc-headings"><li><a href="#class-component">Class Component</a></li><li><a href="#function-component">Function Component</a></li></ul></li><li><a href="#props">Props</a><ul class="toc-headings"><li><a href="#class-component-1">Class Component</a></li><li><a href="#function-component-1">Function Component</a></li></ul></li><li><a href="#state">State</a><ul class="toc-headings"><li><a href="#class-component-2">Class Component</a></li><li><a href="#function-component-2">Function Component</a></li></ul></li><li><a href="#component-lifecycle">Component Lifecycle</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/posts/" class="nav-home"><img src="/posts/img/favicon.ico" alt="Test Site" width="66" height="58"/></a><div><h5>Docs</h5><a href="/posts/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/posts/docs/en/doc2.html">Guides (or other categories)</a><a href="/posts/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/posts/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/posts/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/posts/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>[AWS] Lambda và DynamoDB Streams không còn khó nữa! · Test Site</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử dụng batch process, nghĩa là tại thời điểm đó chúng ta sẽ trả lại dữ liệu cho client ở trạng thái đang xử lý(tránh xảy ra tình trạng timeout). Tuy nhiên ngay tại thời điểm đó một batch process sẽ được khởi động để thực thi tiếp các công việc còn lại. Trong bài viết này tôi sẽ hướng dẫn các bạn viết batch process bằng AWS Lambda bằng cách sử dụng DynamoDB Streams"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="[AWS] Lambda và DynamoDB Streams không còn khó nữa! · Test Site"/><meta property="og:type" content="website"/><meta property="og:url" content="https://hieu-nv.github.io/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua"/><meta property="og:description" content="Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử dụng batch process, nghĩa là tại thời điểm đó chúng ta sẽ trả lại dữ liệu cho client ở trạng thái đang xử lý(tránh xảy ra tình trạng timeout). Tuy nhiên ngay tại thời điểm đó một batch process sẽ được khởi động để thực thi tiếp các công việc còn lại. Trong bài viết này tôi sẽ hướng dẫn các bạn viết batch process bằng AWS Lambda bằng cách sử dụng DynamoDB Streams"/><meta property="og:image" content="https://hieu-nv.github.io/posts/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://hieu-nv.github.io/posts/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/posts/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://hieu-nv.github.io/posts/blog/atom.xml" title="Test Site Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://hieu-nv.github.io/posts/blog/feed.xml" title="Test Site Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/posts/js/scrollSpy.js"></script><link rel="stylesheet" href="/posts/css/main.css"/><script src="/posts/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/posts/"><img class="logo" src="/posts/img/favicon.ico" alt="Test Site"/><h2 class="headerTitleWithLogo">Test Site</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/posts/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/posts/docs/doc4" target="_self">API</a></li><li class=""><a href="/posts/help" target="_self">Help</a></li><li class="siteNavGroupActive"><a href="/posts/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao">[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao">[React] Sử dụng mẫu container trong React như thế nào?</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua">[AWS] Lambda và DynamoDB Streams không còn khó nữa!</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao">[React] Tôi đã làm toast component như thế nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao">[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua">[AWS] Lambda và DynamoDB Streams không còn khó nữa!</a></h1><p class="post-meta">March 15, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><div><span><p>Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử dụng batch process, nghĩa là tại thời điểm đó chúng ta sẽ trả lại dữ liệu cho client ở trạng thái đang xử lý(tránh xảy ra tình trạng timeout). Tuy nhiên ngay tại thời điểm đó một batch process sẽ được khởi động để thực thi tiếp các công việc còn lại. Trong bài viết này tôi sẽ hướng dẫn các bạn viết batch process bằng AWS Lambda bằng cách sử dụng DynamoDB Streams</p>
+<h2><a class="anchor" aria-hidden="true" id="dynamodb-streams"></a><a href="#dynamodb-streams" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DynamoDB Streams</h2>
+<p>DynamoDB Streams là một tính năng trong DynamoDB cho phép bạn lắng nghe thay đổi trên một bảng dữ liệu nào đó và thực hiện các tác vụ đáp ứng yêu cầu nghiệp vụ trong ứng dụng của bạn. Mỗi khi có sự thay đổi DynamoDB sẽ ghi các bản ghi gần như ngay lập tức là dòng dữ liệu mà các ứng dụng đang lắng nghe.</p>
+<p>Với DynamoDB Streams để giải quyết vấn đề timeout của API chúng ta chỉ gần ghi dữ liệu vào bảng trong DynamoDB sau đó dữ liệu được ghi lên dòng dữ liệu mà batch process của chúng ta đang lắng nghe rồi tiếp tục thực hiện nhiệm vụ còn lại.</p>
+<p>Các bạn tham khảo link sau để cài đặt <a href="docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao">DynamoDB</a> ở local nhé.</p>
+<h2><a class="anchor" aria-hidden="true" id="định-nghĩa-bảng-trong-dynamodb"></a><a href="#định-nghĩa-bảng-trong-dynamodb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Định nghĩa bảng trong DynamoDB</h2>
+<p>Các bạn có thẻ sử dụng <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.settingup.html">NoSQL Workbench for Amazon DynamoDB</a> để tạo bảng hoặc viết code để chia sẻ với các member khác như sau:</p>
+<pre><code class="hljs css language-py"><span class="hljs-comment"># -*- coding: utf-8 -*-</span>
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+<span class="hljs-keyword">import</span> boto3
+
+dynamodb = boto3.client(
+    <span class="hljs-string">"dynamodb"</span>,
+    endpoint_url=<span class="hljs-string">"http://localhost:8000"</span>,
+    region_name=<span class="hljs-string">"us-east-1"</span>,
+    aws_access_key_id=<span class="hljs-string">"test"</span>,
+    aws_secret_access_key=<span class="hljs-string">"test"</span>,
+)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_orders</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        dynamodb.delete_table(TableName=<span class="hljs-string">"dev_orders"</span>)
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> exp:
+        print(exp)
+
+    response = dynamodb.create_table(
+        TableName=<span class="hljs-string">"dev_orders"</span>,
+        AttributeDefinitions=[
+            {<span class="hljs-string">"AttributeName"</span>: <span class="hljs-string">"id"</span>, <span class="hljs-string">"AttributeType"</span>: <span class="hljs-string">"S"</span>},
+            {<span class="hljs-string">"AttributeName"</span>: <span class="hljs-string">"status"</span>, <span class="hljs-string">"AttributeType"</span>: <span class="hljs-string">"S"</span>},
+        ],
+        KeySchema=[{<span class="hljs-string">"AttributeName"</span>: <span class="hljs-string">"id"</span>, <span class="hljs-string">"KeyType"</span>: <span class="hljs-string">"HASH"</span>}],
+        ProvisionedThroughput={<span class="hljs-string">"ReadCapacityUnits"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"WriteCapacityUnits"</span>: <span class="hljs-number">1</span>},
+        GlobalSecondaryIndexes=[
+            {
+                <span class="hljs-string">"IndexName"</span>: <span class="hljs-string">"statusGSIndex"</span>,
+                <span class="hljs-string">"KeySchema"</span>: [{<span class="hljs-string">"AttributeName"</span>: <span class="hljs-string">"status"</span>, <span class="hljs-string">"KeyType"</span>: <span class="hljs-string">"HASH"</span>}],
+                <span class="hljs-string">"Projection"</span>: {<span class="hljs-string">"ProjectionType"</span>: <span class="hljs-string">"ALL"</span>},
+                <span class="hljs-string">"ProvisionedThroughput"</span>: {
+                    <span class="hljs-string">"ReadCapacityUnits"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">"WriteCapacityUnits"</span>: <span class="hljs-number">1</span>,
+                },
+            },
+        ],
+        <span class="hljs-comment"># bắt buộc phải có khai báo này để sử dụng DynamoDB Streams cho bảng này</span>
+        StreamSpecification={
+            <span class="hljs-string">"StreamEnabled"</span>: <span class="hljs-literal">True</span>,
+            <span class="hljs-string">"StreamViewType"</span>: <span class="hljs-string">"NEW_AND_OLD_IMAGES"</span>,
+        },
+    )
+    print(response)
+
+
+create_orders()
+</code></pre>
+<p>Kiểm tra bảng được tạo bằng NoSQL Workbench for Amazon DynamoDB</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/15150835/Screen-Shot-2020-03-15-at-3.03.57-PM.png" alt="dev_orders"></p>
+<p>Các bạn chú ý giá trị bôi vàng nhé. Đây là dòng dữ liệu sẽ được DynamoDB ghi lên đó. Khi ứng dụng của bạn lắng nghe dòng dữ liệu này thì bất kỳ hành động nào xảy ra trên bảng sẽ được ghi lên dòng dữ liệu và ứng dụng của chúng ta sẽ phát hiện được điều đó.</p>
+<h2><a class="anchor" aria-hidden="true" id="định-nghĩa-lambda-lắng-nghe-dòng-dữ-liệu-từ-dynamodb"></a><a href="#định-nghĩa-lambda-lắng-nghe-dòng-dữ-liệu-từ-dynamodb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Định nghĩa Lambda lắng nghe dòng dữ liệu từ DynamoDB</h2>
+<p>Để lắng nghe dòng dữ liệu từ DynamoDB Streams bạn cần thêm <code>serverless-offline-dynamodb-streams</code> và cấu hìn <code>serverless.yml</code> như sau:</p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">custom:</span>
+  <span class="hljs-comment"># ...</span>
+  <span class="hljs-attr">serverless-offline-dynamodb-streams:</span>
+    <span class="hljs-attr">endpoint:</span> <span class="hljs-string">http://dynamodb:8000</span>
+    <span class="hljs-attr">accessKeyId:</span> <span class="hljs-string">root</span>
+    <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">root</span>
+<span class="hljs-comment"># ...</span>
+<span class="hljs-attr">plugins:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">serverless-offline</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">serverless-python-requirements</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">serverless-offline-dynamodb-streams</span>
+</code></pre>
+<p>Các bạn tham khảo bài viết <a href="https://magz.techover.io/2020/03/01/mo-phong-aws-lambda-api-gateway-bang-serverless-offline/">Mô phỏng AWS Lambda &amp; API Gateway bằng Serverless Offline</a> để biết các viết API bằng Lambda nhé.</p>
+<p>Trong bài viết này, dể thực hiện lắng nghe dòng dữ liệu, bạn định nghĩa hàm Lambda trong Serverless như sau:</p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">jobs_order:</span>
+  <span class="hljs-attr">handler:</span> <span class="hljs-string">src.jobs.order.lambda_handler</span>
+  <span class="hljs-attr">events:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">stream:</span>
+        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">type:</span> <span class="hljs-string">dynamodb</span>
+        <span class="hljs-comment"># đây là giá trị màu vàng tôi có đề cập ở trên</span>
+        <span class="hljs-attr">arn:</span> <span class="hljs-string">arn:aws:dynamodb:ddblocal:000000000000:table/dev_orders/stream/2020-03-15T07:59:46.532</span>
+        <span class="hljs-attr">batchSize:</span> <span class="hljs-number">1</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="thử-viết-rest-api-ghi-dữ-liệu-vào-bảng-và-kiểm-tra-dynamodb-streams"></a><a href="#thử-viết-rest-api-ghi-dữ-liệu-vào-bảng-và-kiểm-tra-dynamodb-streams" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thử viết Rest API ghi dữ liệu vào bảng và kiểm tra DynamoDB Streams</h2>
+<p>Các bạn định nghĩa một API như sau:</p>
+<pre><code class="hljs css language-yml"><span class="hljs-attr">functions:</span>
+  <span class="hljs-attr">post_orders:</span>
+    <span class="hljs-attr">handler:</span> <span class="hljs-string">src.api.post_orders.lambda_handler</span>
+    <span class="hljs-attr">events:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">http:</span>
+          <span class="hljs-attr">method:</span> <span class="hljs-string">post</span>
+          <span class="hljs-attr">path:</span> <span class="hljs-string">api/orders</span>
+          <span class="hljs-attr">cors:</span> <span class="hljs-literal">true</span>
+</code></pre>
+<p><code>src/api/post_orders.py</code></p>
+<pre><code class="hljs css language-py"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+<span class="hljs-keyword">from</span> uuid <span class="hljs-keyword">import</span> uuid4
+<span class="hljs-keyword">import</span> boto3
+
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.INFO)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lambda_handler</span><span class="hljs-params">(event, context)</span>:</span>
+    headers = {<span class="hljs-string">"Access-Control-Allow-Origin"</span>: <span class="hljs-string">"*"</span>, <span class="hljs-string">"Accept"</span>: <span class="hljs-string">"application/json"</span>}
+    body = json.loads(event[<span class="hljs-string">"body"</span>])
+    dynamodb = boto3.client(
+        <span class="hljs-string">"dynamodb"</span>,
+        endpoint_url=<span class="hljs-string">"http://localhost:8000"</span>,
+        region_name=<span class="hljs-string">"us-east-1"</span>,
+        aws_access_key_id=<span class="hljs-string">"test"</span>,
+        aws_secret_access_key=<span class="hljs-string">"test"</span>,
+    )
+    now = int(datetime.utcnow().timestamp())
+    body = dynamodb.put_item(
+        TableName=<span class="hljs-string">"dev_orders"</span>,
+        Item={
+            <span class="hljs-string">"id"</span>: {<span class="hljs-string">"S"</span>: str(uuid4())},
+            <span class="hljs-string">"name"</span>: {<span class="hljs-string">"S"</span>: body[<span class="hljs-string">"name"</span>]},
+            <span class="hljs-string">"status"</span>: {<span class="hljs-string">"S"</span>: <span class="hljs-string">" "</span>},
+            <span class="hljs-string">"created_at"</span>: {<span class="hljs-string">"N"</span>: str(now)},
+            <span class="hljs-string">"updated_at"</span>: {<span class="hljs-string">"N"</span>: str(now)},
+        },
+    )
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">"statusCode"</span>: <span class="hljs-number">200</span>,
+        <span class="hljs-string">"headers"</span>: headers,
+        <span class="hljs-string">"body"</span>: json.dumps(body),
+    }
+</code></pre>
+<p>Các bạn thử post dữ liệu bằng Postman nhé
+<img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/15160205/Screen-Shot-2020-03-15-at-4.01.11-PM.png" alt="post_orders"></p>
+<p>Các bạn để ý Terminal sau khi post dữ liệu nhé</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/15160339/render1584262789150.gif" alt="terminal"></p>
+<p>Cám ơn các bạn đã theo dõi bài viết. Hy vọng bài viết đã giúp các bạn có thể sử dùng Lambda và DynamoDB tốt hơn.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/posts/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#dynamodb-streams">DynamoDB Streams</a></li><li><a href="#định-nghĩa-bảng-trong-dynamodb">Định nghĩa bảng trong DynamoDB</a></li><li><a href="#định-nghĩa-lambda-lắng-nghe-dòng-dữ-liệu-từ-dynamodb">Định nghĩa Lambda lắng nghe dòng dữ liệu từ DynamoDB</a></li><li><a href="#thử-viết-rest-api-ghi-dữ-liệu-vào-bảng-và-kiểm-tra-dynamodb-streams">Thử viết Rest API ghi dữ liệu vào bảng và kiểm tra DynamoDB Streams</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/posts/" class="nav-home"><img src="/posts/img/favicon.ico" alt="Test Site" width="66" height="58"/></a><div><h5>Docs</h5><a href="/posts/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/posts/docs/en/doc2.html">Guides (or other categories)</a><a href="/posts/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/posts/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/posts/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/posts/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>

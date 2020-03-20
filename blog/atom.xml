@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://hieu-nv.github.io/posts/blog</id>
+    <title>Test Site Blog</title>
+    <updated>2020-03-20T06:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://hieu-nv.github.io/posts/blog"/>
+    <subtitle>The best place to stay up-to-date with the latest Test Site news and events.</subtitle>
+    <logo>https://hieu-nv.github.io/posts/img/favicon.ico</logo>
+    <rights>Copyright © 2020 Your Name or Your Company Name</rights>
+    <entry>
+        <title type="html"><![CDATA[[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao.html"/>
+        <updated>2020-03-20T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Static Type Checking và Runtime Type Checking là hai thuật ngữ ban đâu cảm giác có vẻ không quen thuộc cho nhưng nó lại lai thứ có lẽ các bạn đang dùng hàng ngày. Như các bạn biết thì JavaScript là ngôn ngữ định kiểu động, nghĩa là kiểu dữ liệu chỉ đ...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[React] Sử dụng mẫu container trong React như thế nào?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao.html"/>
+        <updated>2020-03-17T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Chắc hẳn ai cũng biết tới nguyên lý đầu tiên của SOLID đó là trách nhiệm đơn nhất. Nghĩa là mỗi một đối tượng chỉ làm một nhiệm vụ duy nhất. Đơn giản vì với tính đơn nhất chúng ta sẽ dễ dàng kiểm soát mã nguồn hơn (cho cả người code lần người review)...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[AWS] Lambda và DynamoDB Streams không còn khó nữa!]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua.html"/>
+        <updated>2020-03-15T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử ...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[React] Tôi đã làm toast component như thế nào?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao.html"/>
+        <updated>2020-03-14T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Với bất kỳ ứng dụng nào việc hiển thị thông báo lỗi là không thể thiếu được. Các bạn có thể có rất nhiều cách làm để hiển thị được các thông báo lỗi này. Trong bài viết này tôi xin chia sẻ cách làm của tôi để các bạn cùng tham khảo nhé.</p> <p>Mục đích của ...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao.html"/>
+        <updated>2020-03-11T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên t...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[React] Có React Context API rồi, bạn còn dùng Redux không?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/09/react-co-react-context-api-roi-ban-con-dung-redux-khong.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/09/react-co-react-context-api-roi-ban-con-dung-redux-khong.html"/>
+        <updated>2020-03-09T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>State Management là một trong những vấn đề tồn tại ở bất kỳ ứng dụng nào viết bằng React. Redux là một trong những công cụ như thế. Nó từng một thời là xu hướng được tất cả các ứng dụng viết bằng React sử dụng. Và mỗi khi nhắc đến React thì người ta ...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[React] Class Component và Function Component, bạn chọn viết theo cách nào?]]></title>
+        <id>https://hieu-nv.github.io/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao.html</id>
+        <link href="https://hieu-nv.github.io/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao.html"/>
+        <updated>2020-03-06T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo các...</p>]]></summary>
+        <author>
+            <name>Hieu Nguyen</name>
+            <email/>
+            <uri>https://twitter.com/hieunv8</uri>
+        </author>
+    </entry>
+</feed>
