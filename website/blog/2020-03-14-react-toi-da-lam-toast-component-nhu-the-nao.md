@@ -5,6 +5,8 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
+![react](https://images.unsplash.com/photo-1581276879432-15e50529f34b)
+
 Với bất kỳ ứng dụng nào việc hiển thị thông báo lỗi là không thể thiếu được. Các bạn có thể có rất nhiều cách làm để hiển thị được các thông báo lỗi này. Trong bài viết này tôi xin chia sẻ cách làm của tôi để các bạn cùng tham khảo nhé.
 
 Mục đích của tôi khi viết component này phải đảm bảo nó dễ dùng như hàm `window.alert()` vậy. Trong bài viết này tôi sẽ sử dụng [Material UI](https://material-ui.com/) để hiển thị thông báo lỗi.

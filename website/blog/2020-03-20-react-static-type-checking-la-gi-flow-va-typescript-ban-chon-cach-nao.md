@@ -5,6 +5,8 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
+![react](https://images.unsplash.com/photo-1581276879432-15e50529f34b)
+
 Static Type Checking và Runtime Type Checking là hai thuật ngữ ban đâu cảm giác có vẻ không quen thuộc cho nhưng nó lại lai thứ có lẽ các bạn đang dùng hàng ngày. Như các bạn biết thì JavaScript là ngôn ngữ định kiểu động, nghĩa là kiểu dữ liệu chỉ được xác định tại thời điểm thực thi. Do đó khi lập trình chúng ta không cần xác định kiểu dữ liệu cho biến. Điều này vô hình chung làm cho mã nguồn của chúng ta trở nên khó đọc hơn và khó debug hơn nữa. Chính vì vậy việc xác định kiểu dữ liệu giúp cho chúng ta kiểu soát và debug dễ dàng hơn. Trong bài viết này tôi sẽ chia sẻ với các bạn cách công đồng đang làm để hỗ trợ hai kiểu kiểm tra kiểu dữ liệu này.
 
 ## Static Type Checking là gì?

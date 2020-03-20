@@ -5,6 +5,8 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
+![react](https://images.unsplash.com/photo-1581276879432-15e50529f34b)
+
 Chắc hẳn ai cũng biết tới nguyên lý đầu tiên của SOLID đó là trách nhiệm đơn nhất. Nghĩa là mỗi một đối tượng chỉ làm một nhiệm vụ duy nhất. Đơn giản vì với tính đơn nhất chúng ta sẽ dễ dàng kiểm soát mã nguồn hơn (cho cả người code lần người review). Chưa kể tới việc với tính đơn nhất thì mã nguồn của bạn cũng trở nên trong sáng hơn. Với anh em lập trình React cũng vậy, bài toán khá đau đầu là làm sao tách logic ra khỏi phần mã nguồn kết xuất HTML. Cách làm như vậy giúp chúng ta thay vì viết một React Component để là cả hai việc thì bây giờ chúng ta sẽ viết hai React Component để làm hai nhiệm vụ khác nhau. Trong bài viết này tôi sẽ hướng dẫn các bạn sử dụng mấu container để làm việc đó.
 
 ## Container component là gì?

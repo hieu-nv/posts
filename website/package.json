@@ -1,4 +1,6 @@
 {
+  "name": "@hieunv/posts",
+  "license": "MIT",
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
@@ -6,10 +8,10 @@
     "publish-gh-pages": "docusaurus-publish",
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",
-    "rename-version": "docusaurus-rename-version",
-    "publish": "GIT_USER=hieu-nv CURRENT_BRANCH=master yarn publish-gh-pages"
+    "rename-version": "docusaurus-rename-version"
   },
   "devDependencies": {
     "docusaurus": "^1.14.4"
-  }
+  },
+  "version": "0.0.0"
 }

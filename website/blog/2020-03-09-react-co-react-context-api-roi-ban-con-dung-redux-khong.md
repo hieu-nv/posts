@@ -5,6 +5,8 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
+![react](https://images.unsplash.com/photo-1581276879432-15e50529f34b)
+
 State Management là một trong những vấn đề tồn tại ở bất kỳ ứng dụng nào viết bằng React. Redux là một trong những công cụ như thế. Nó từng một thời là xu hướng được tất cả các ứng dụng viết bằng React sử dụng. Và mỗi khi nhắc đến React thì người ta cũng nhắc đến Redux luôn. Không những thế các biến thể của nó cũng được implement cho Angular như ngrx/store hay vuex cho VueJS. Tuy nhiên với ứng dụng ngày càng cồng kềnh thì việc định nghĩa và quản lý state ngày càng trở nên vất vả hơn. Trải qua một thời gian khá dài với Redux thì mãi tới gần đây Facebook mới cho ra đời Context API để giải quyết các vấn đề còn tồn tại với Redux. Trong bài viết này tôi sẽ đưa ra một số so sánh để giúp các bạn có thể chuyển từ ứng dụng viết bằng Redux sang sử dụng Context API.
 
 ## Redux

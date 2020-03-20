@@ -30,8 +30,8 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: "Hieu Nguyen's Posts",
-  organizationName: 'Hieu Nguyen',
+  projectName: 'posts',
+  organizationName: 'hieu-nv',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'

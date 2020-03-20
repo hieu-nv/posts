@@ -5,9 +5,9 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
-Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé.
-
 ![react](https://images.unsplash.com/photo-1581276879432-15e50529f34b)
+
+Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé.
 
 ## Cú pháp
 

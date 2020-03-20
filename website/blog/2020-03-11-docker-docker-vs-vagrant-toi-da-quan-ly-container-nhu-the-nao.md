@@ -5,6 +5,8 @@ authorURL: https://twitter.com/hieunv8
 authorFBID: 100006410080637
 ---
 
+![container](https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?ixlib=rb-1.2.1&auto=format&fit=crop&w=2736&q=80)
+
 Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên trong dự án là thực sự cần thiết. Trong bài viết này tôi sẽ chia sẻ với các bạn cách mà tôi đã làm với các dự án của mình.
 
 ![docker-compose up -d](https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/12232802/render1584030034324.gif)
