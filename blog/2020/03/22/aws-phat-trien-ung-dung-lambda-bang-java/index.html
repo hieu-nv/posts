@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>[AWS] Phát triển ứng dụng Lambda bằng Java · Test Site</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Như các bạn đã biết hiện nay môi trường thực thi sử dụng trong Lambda phần lớn đang sử dụng Node hay Python. Tuy nhiên trên thực tế đôi khi bạn cần sử dụng một môi trường thực thi khác như Java chẳng hạn. Trên thực tế thì AWS cũng đang hỗ trợ khá nhiều môi trường thực thi khác nhau. Có nhiều lý do dẫn tới việc chúng ta phải sử dụng một môi trường thực thi nào đó tuỳ vào tình hình dự án. Trong bài viết này tôi sẽ hướng dẫn các bạn xây dựng ứng dụng Lamba sử dụng môi trường thực thi là Java."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="[AWS] Phát triển ứng dụng Lambda bằng Java · Test Site"/><meta property="og:type" content="website"/><meta property="og:url" content="https://hieu-nv.github.io/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java"/><meta property="og:description" content="Như các bạn đã biết hiện nay môi trường thực thi sử dụng trong Lambda phần lớn đang sử dụng Node hay Python. Tuy nhiên trên thực tế đôi khi bạn cần sử dụng một môi trường thực thi khác như Java chẳng hạn. Trên thực tế thì AWS cũng đang hỗ trợ khá nhiều môi trường thực thi khác nhau. Có nhiều lý do dẫn tới việc chúng ta phải sử dụng một môi trường thực thi nào đó tuỳ vào tình hình dự án. Trong bài viết này tôi sẽ hướng dẫn các bạn xây dựng ứng dụng Lamba sử dụng môi trường thực thi là Java."/><meta property="og:image" content="https://hieu-nv.github.io/posts/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://hieu-nv.github.io/posts/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/posts/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://hieu-nv.github.io/posts/blog/atom.xml" title="Test Site Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://hieu-nv.github.io/posts/blog/feed.xml" title="Test Site Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/posts/js/scrollSpy.js"></script><link rel="stylesheet" href="/posts/css/main.css"/><script src="/posts/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/posts/"><img class="logo" src="/posts/img/favicon.ico" alt="Test Site"/><h2 class="headerTitleWithLogo">Test Site</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/posts/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/posts/docs/doc4" target="_self">API</a></li><li class=""><a href="/posts/help" target="_self">Help</a></li><li class="siteNavGroupActive"><a href="/posts/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/30/aws-remote-debugging-ung-dung-lambda-viet-bang-java-voi-visual-studio-code">[AWS] Remote Debugging ứng dụng Lambda viết bằng Java với Visual Studio Code</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/22/aws-serverless-va-sam-ban-chon-dung-cai-nao">[AWS] Serverless và SAM, bạn chọn dùng cái nào?</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java">[AWS] Phát triển ứng dụng Lambda bằng Java</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/21/react-ket-hop-cac-mau-lap-trinh-de-su-dung-hieu-qua-runtime-type-checking">[React] Kết hợp các mẫu lập trình để sử dụng hiệu quả Runtime Type Checking</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao">[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java">[AWS] Phát triển ứng dụng Lambda bằng Java</a></h1><p class="post-meta">March 22, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><div><span><p>Như các bạn đã biết hiện nay môi trường thực thi sử dụng trong Lambda phần lớn đang sử dụng Node hay Python. Tuy nhiên trên thực tế đôi khi bạn cần sử dụng một môi trường thực thi khác như Java chẳng hạn. Trên thực tế thì AWS cũng đang hỗ trợ khá nhiều môi trường thực thi khác nhau. Có nhiều lý do dẫn tới việc chúng ta phải sử dụng một môi trường thực thi nào đó tuỳ vào tình hình dự án. Trong bài viết này tôi sẽ hướng dẫn các bạn xây dựng ứng dụng Lamba sử dụng môi trường thực thi là Java.</p>
+<h2><a class="anchor" aria-hidden="true" id="các-công-cụ-cần-thiết"></a><a href="#các-công-cụ-cần-thiết" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Các công cụ cần thiết</h2>
+<ul>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html">SAM</a></li>
+<li><a href="https://www.oracle.com/java/technologies/javase-downloads.html">Oracle JDK</a></li>
+<li><a href="https://maven.apache.org/">Maven</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="docker"></a><a href="#docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docker</h3>
+<p>Chúng ta cần Docker bởi vì công cụ thực thi SAM CLI sẽ sử dụng docker container để thực thi ứng dụng. Bạn thao khảo đường dẫn sau để <a href="https://docs.docker.com/docker-for-mac/install/">cài đặt Docker</a></p>
+<h3><a class="anchor" aria-hidden="true" id="sam"></a><a href="#sam" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SAM</h3>
+<p>Chúng ta sẽ sử dụng SAM vì chúng ta cần một môi trường thực thi có thể chạy trên môi trường cục bộ và có thể debug được. Để cài SAM bạn làm theo hướng dẫn sau:</p>
+<pre><code class="hljs css language-bash">brew tap aws/tap
+brew install aws-sam-cli
+</code></pre>
+<p>Chúng ta sử dụng brew để cài SAM nên bạn cần cài brew trước. Nếu chưa cài brew thì bạn có thể thao khảo cách cài brew như sau:</p>
+<pre><code class="hljs css language-bash">/bin/bash -c <span class="hljs-string">"<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span>
+hieunv@HieuNV ~ % brew --version
+Homebrew 2.2.10
+Homebrew/homebrew-core (git revision f0179; last commit 2020-03-22)
+Homebrew/homebrew-cask (git revision 0a88ae; last commit 2020-03-22)
+</code></pre>
+<p>Để kiểm tra xem bạn đã cài đặt thành công chưa, bạn sử dụng lệnh sau:</p>
+<pre><code class="hljs css language-bash">hieunv@HieuNV ~ % sam --version
+SAM CLI, version 0.45.0
+</code></pre>
+<p>Trên Windows thì bạn thao khảo <a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install-windows.html">đường dẫn này</a></p>
+<h3><a class="anchor" aria-hidden="true" id="oracle-jdk"></a><a href="#oracle-jdk" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Oracle JDK</h3>
+<p>Chúng ta sẽ sử dụng môi trường thực thi Java nên việc cài đặt Oracle JDK là đương nhiên đúng không. Các bạn tham khảo cách <a href="">cài đặt Oracle JDK tại đây</a> nhé.</p>
+<h3><a class="anchor" aria-hidden="true" id="maven"></a><a href="#maven" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Maven</h3>
+<p>SAM sẽ sử dụng maven để build nên chúng ta cần cài đặt thêm maven. Để cài đặt Maven các bạn sử dụng lệnh sau:</p>
+<pre><code class="hljs css language-bash">brew install --ignore-dependencies maven
+</code></pre>
+<p>Các bạn chú ý, chúng ta cần sử dụng <code>--ignore-dependencies</code> để bỏ qua việc cài đặt Open JDK nhé. Mặc định maven sẽ sử dụng Open JDK. Tuy nhiên chúng ta đã cài đặt Oracle JDK rồi nên không cần cài Open JDK nữa.</p>
+<p>Tài liệu tham khảo:</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html">Installing the AWS SAM CLI</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="tạo-project-bằng-sam"></a><a href="#tạo-project-bằng-sam" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tạo project bằng SAM</h2>
+<ul>
+<li>Tạo một project mới</li>
+</ul>
+<pre><code class="hljs">hieunv@HieuNV hieunv % sam init -r java11
+Which template source would you like to <span class="hljs-keyword">use</span>?
+    <span class="hljs-number">1</span> - AWS <span class="hljs-keyword">Quick</span> <span class="hljs-keyword">Start</span> Templates
+    <span class="hljs-number">2</span> - Custom <span class="hljs-keyword">Template</span> Location
+Choice: <span class="hljs-number">1</span>
+
+Which dependency manager would you <span class="hljs-keyword">like</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span>?
+    <span class="hljs-number">1</span> - maven
+    <span class="hljs-number">2</span> - gradle
+Dependency manager: <span class="hljs-number">1</span>
+
+<span class="hljs-keyword">Project</span> <span class="hljs-keyword">name</span> [sam-app]:
+
+Cloning app templates <span class="hljs-keyword">from</span> https://github.com/awslabs/aws-sam-cli-app-templates.git
+
+AWS <span class="hljs-keyword">quick</span> <span class="hljs-keyword">start</span> application templates:
+    <span class="hljs-number">1</span> - Hello World Example: Maven
+    <span class="hljs-number">2</span> - EventBridge Hello World: Maven
+    <span class="hljs-number">3</span> - EventBridge App <span class="hljs-keyword">from</span> scratch (<span class="hljs-number">100</span>+ <span class="hljs-keyword">Event</span> Schemas): Maven
+<span class="hljs-keyword">Template</span> selection: <span class="hljs-number">1</span>
+
+<span class="hljs-comment">-----------------------</span>
+Generating application:
+<span class="hljs-comment">-----------------------</span>
+<span class="hljs-keyword">Name</span>: sam-app
+Runtime: java11
+Dependency Manager: maven
+Application <span class="hljs-keyword">Template</span>: hello-world
+<span class="hljs-keyword">Output</span> <span class="hljs-keyword">Directory</span>: .
+
+<span class="hljs-keyword">Next</span> steps can be <span class="hljs-keyword">found</span> <span class="hljs-keyword">in</span> the README <span class="hljs-keyword">file</span> <span class="hljs-keyword">at</span> ./sam-app/README.md
+</code></pre>
+<ul>
+<li>Trước khi thực thi bạn cần build project trước</li>
+</ul>
+<pre><code class="hljs css language-bash">hieunv@HieuNV hieunv % <span class="hljs-built_in">cd</span> sam-app
+hieunv@HieuNV sam-app % sam build
+Building resource <span class="hljs-string">'HelloWorldFunction'</span>
+/usr/<span class="hljs-built_in">local</span>/bin/mvn is using a JVM with major version 13 <span class="hljs-built_in">which</span> is newer than 11 that is supported by AWS Lambda. The compiled <span class="hljs-keyword">function</span> code may not run <span class="hljs-keyword">in</span> AWS Lambda unless the project has been configured to be compatible with Java 11 using <span class="hljs-string">'maven.compiler.target'</span> <span class="hljs-keyword">in</span> Maven.
+Running JavaMavenWorkflow:CopySource
+Running JavaMavenWorkflow:MavenBuild
+Running JavaMavenWorkflow:MavenCopyDependency
+Running JavaMavenWorkflow:MavenCopyArtifacts
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam/build
+Built Template   : .aws-sam/build/template.yaml
+
+Commands you can use next
+=========================
+[*] Invoke Function: sam <span class="hljs-built_in">local</span> invoke
+[*] Deploy: sam deploy --guided
+</code></pre>
+<ul>
+<li>Khởi động ứng dụng (trước khi khởi động bạn cần đảm bảo rằng Docker đang hoạt động)</li>
+</ul>
+<pre><code class="hljs">hieunv@HieuNV sam-app % sam <span class="hljs-keyword">local</span> <span class="hljs-keyword">start</span>-api
+Mounting HelloWorldFunction at http://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3000</span>/hello [<span class="hljs-keyword">GET</span>]
+You can now browse <span class="hljs-keyword">to</span> the above endpoints <span class="hljs-keyword">to</span> invoke your <span class="hljs-keyword">functions</span>. You <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> need <span class="hljs-keyword">to</span> <span class="hljs-keyword">restart</span>/reload SAM CLI <span class="hljs-keyword">while</span> working <span class="hljs-keyword">on</span> your <span class="hljs-keyword">functions</span>, changes will be reflected instantly/automatically. You <span class="hljs-keyword">only</span> need <span class="hljs-keyword">to</span> <span class="hljs-keyword">restart</span> SAM CLI <span class="hljs-keyword">if</span> you <span class="hljs-keyword">update</span> your AWS SAM <span class="hljs-keyword">template</span>
+<span class="hljs-number">2020</span><span class="hljs-number">-03</span><span class="hljs-number">-22</span> <span class="hljs-number">22</span>:<span class="hljs-number">07</span>:<span class="hljs-number">45</span>  * Running <span class="hljs-keyword">on</span> http://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3000</span>/ (Press CTRL+C <span class="hljs-keyword">to</span> quit)
+</code></pre>
+<p>Chúng ta thử truy cập vào <code>http://127.0.0.1:3000/hello</code> bằng Postman. Nếu các bạn chưa chạy lần nào thì sẽ phải chờ hơi lâu một chút để Docker tải image cần thiết.</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/22221132/Screen-Shot-2020-03-22-at-10.10.41-PM.png" alt="start-api"></p>
+<p>Trong bài viết này tôi đã hướng dẫn các bạn cách viết một API bằng Lambda sử dụng môi trường thực thi Java. Hy vọng bài viết sẽ giúp ích cho dự án của các bạn.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/posts/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#các-công-cụ-cần-thiết">Các công cụ cần thiết</a><ul class="toc-headings"><li><a href="#docker">Docker</a></li><li><a href="#sam">SAM</a></li><li><a href="#oracle-jdk">Oracle JDK</a></li><li><a href="#maven">Maven</a></li></ul></li><li><a href="#tạo-project-bằng-sam">Tạo project bằng SAM</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/posts/" class="nav-home"><img src="/posts/img/favicon.ico" alt="Test Site" width="66" height="58"/></a><div><h5>Docs</h5><a href="/posts/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/posts/docs/en/doc2.html">Guides (or other categories)</a><a href="/posts/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/posts/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/posts/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/posts/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>

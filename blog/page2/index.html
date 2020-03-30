@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Blog · Test Site</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A website for testing"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Blog · Test Site"/><meta property="og:type" content="website"/><meta property="og:url" content="https://hieu-nv.github.io/posts/"/><meta property="og:description" content="A website for testing"/><meta property="og:image" content="https://hieu-nv.github.io/posts/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://hieu-nv.github.io/posts/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/posts/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://hieu-nv.github.io/posts/blog/atom.xml" title="Test Site Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://hieu-nv.github.io/posts/blog/feed.xml" title="Test Site Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/posts/js/scrollSpy.js"></script><link rel="stylesheet" href="/posts/css/main.css"/><script src="/posts/js/codetabs.js"></script></head><body class="blog"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/posts/"><img class="logo" src="/posts/img/favicon.ico" alt="Test Site"/><h2 class="headerTitleWithLogo">Test Site</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/posts/docs/doc1" target="_self">Docs</a></li><li class=""><a href="/posts/docs/doc4" target="_self">API</a></li><li class=""><a href="/posts/help" target="_self">Help</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/posts/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/30/aws-remote-debugging-ung-dung-lambda-viet-bang-java-voi-visual-studio-code">[AWS] Remote Debugging ứng dụng Lambda viết bằng Java với Visual Studio Code</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/22/aws-serverless-va-sam-ban-chon-dung-cai-nao">[AWS] Serverless và SAM, bạn chọn dùng cái nào?</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java">[AWS] Phát triển ứng dụng Lambda bằng Java</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/21/react-ket-hop-cac-mau-lap-trinh-de-su-dung-hieu-qua-runtime-type-checking">[React] Kết hợp các mẫu lập trình để sử dụng hiệu quả Runtime Type Checking</a></li><li class="navListItem"><a class="navItem" href="/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao">[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/09/react-co-react-context-api-roi-ban-con-dung-redux-khong">[React] Có React Context API rồi, bạn còn dùng Redux không?</a></h1><p class="post-meta">March 9, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><article class="post-content"><div><span><p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p>
+<p>State Management là một trong những vấn đề tồn tại ở bất kỳ ứng dụng nào viết bằng React. Redux là một trong những công cụ như thế. Nó từng một thời là xu hướng được tất cả các ứng dụng viết bằng React sử dụng. Và mỗi khi nhắc đến React thì người ta cũng nhắc đến Redux luôn. Không những thế các biến thể của nó cũng được implement cho Angular như ngrx/store hay vuex cho VueJS. Tuy nhiên với ứng dụng ngày càng cồng kềnh thì việc định nghĩa và quản lý state ngày càng trở nên vất vả hơn. Trải qua một thời gian khá dài với Redux thì mãi tới gần đây Facebook mới cho ra đời Context API để giải quyết các vấn đề còn tồn tại với Redux. Trong bài viết này tôi sẽ đưa ra một số so sánh để giúp các bạn có thể chuyển từ ứng dụng viết bằng Redux sang sử dụng Context API.</p>
+<h2><a class="anchor" aria-hidden="true" id="redux"></a><a href="#redux" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Redux</h2>
+<p>Khi bạn muốn định nghĩa <code>state</code> với Redux thì mọi thứ có vẻ khá phức tạp. Bước đầu tiên bạn cần làm là phải khai báo đăng ký Redux Store với React</p>
+<ul>
+<li>Khai báo Redux Store:</li>
+</ul>
+<p><code>src/store/index.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> { createStore, applyMiddleware, compose } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+<span class="hljs-keyword">import</span> thunk <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-thunk'</span>;
+<span class="hljs-keyword">import</span> { createLogger } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-logger'</span>;
+<span class="hljs-comment">// import reducer để thay đổi giá trị state</span>
+<span class="hljs-keyword">import</span> createRootReducer <span class="hljs-keyword">from</span> <span class="hljs-string">'../reducers'</span>;
+
+<span class="hljs-comment">// kiểm tra sự tồn tại của Redux Dev Tools và add nó vào phục vụ quá trình debug</span>
+<span class="hljs-keyword">const</span> composeEnhancers =
+  <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? <span class="hljs-built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (initialState) =&gt; {
+  <span class="hljs-keyword">const</span> { NODE_ENV } = process.env;
+
+  <span class="hljs-keyword">let</span> store;
+  <span class="hljs-keyword">if</span> (NODE_ENV === <span class="hljs-string">'development'</span>) {
+    <span class="hljs-comment">// khởi tạo store sử dụng API của Redux, ở đây có sử dụng thêm redux-thunk để đơn giản hoá việc xử lý HTTP API</span>
+    store = createStore(createRootReducer(), initialState, composeEnhancers(applyMiddleware(thunk, createLogger())));
+
+    <span class="hljs-comment">// cấu hình hot reload để mỗi khi bạn thay đổi *.js thì nó tự động được load lại</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) {
+      <span class="hljs-built_in">module</span>.hot.accept(<span class="hljs-string">'../reducers'</span>, () =&gt; {
+        <span class="hljs-keyword">const</span> nextRootReducer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../reducers'</span>).default;
+        store.replaceReducer(nextRootReducer);
+      });
+    }
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// chỗ này để định nghĩa store trên môi trường production</span>
+    store = createStore(createRootReducer(), initialState, composeEnhancers(applyMiddleware(thunk)));
+  }
+  <span class="hljs-keyword">return</span> store;
+};
+</code></pre>
+<p>Có vẻ khá nhiều việc cần phải làm với Redux. Nhưng vẫn chưa hết đâu :)</p>
+<ul>
+<li>Đăng ký Redux Store vào ứng dụng React:</li>
+</ul>
+<p><code>src/index.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// sử dụng thư viện này để đăng ký Redux với React nhé</span>
+<span class="hljs-keyword">import</span> { Provider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
+<span class="hljs-comment">// import định nghĩa store được khai báo bên trên</span>
+<span class="hljs-keyword">import</span> createStore <span class="hljs-keyword">from</span> <span class="hljs-string">'./store'</span>;
+<span class="hljs-comment">//khởi tạo Redux store</span>
+<span class="hljs-keyword">const</span> store = createStore({});
+
+<span class="hljs-comment">// render ứng dụng React</span>
+render(
+  <span class="hljs-comment">// kết nối Redux store vào React</span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{store}</span>&gt;</span>
+    {
+      // mã nguồn ứng dụng được khái báo ở đây. Trong này bạn có thể truy cập vào state của Redux thông qua hàm connect
+    }
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>,
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'app-container'</span>)
+);
+</code></pre>
+<ul>
+<li>Định nghĩa <code>reducer</code> để thay đổi giá trị <code>state</code></li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> counterReducer = <span class="hljs-function">(<span class="hljs-params">state = { count: <span class="hljs-number">0</span> }, action</span>) =&gt;</span> {
+  <span class="hljs-keyword">switch</span> (action.type) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'INCREMENT'</span>:
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">count</span>: count + <span class="hljs-number">1</span> };
+    <span class="hljs-keyword">case</span> <span class="hljs-string">'DECREMENT'</span>:
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">count</span>: count - <span class="hljs-number">1</span> };
+    <span class="hljs-keyword">default</span>:
+      <span class="hljs-keyword">return</span> state;
+  }
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> reducer;
+</code></pre>
+<ul>
+<li>Kết nỗi Redux Store với React Component</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  render() {
+    <span class="hljs-comment">// Trạng thái và các hàm được đăng ký bởi hàm connect bên dưới</span>
+    <span class="hljs-keyword">const</span> { count, increment, decrement } = <span class="hljs-keyword">this</span>.props;
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{decrement}</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{count}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{increment}</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(
+  <span class="hljs-comment">// map giá trịg trong Redux Store vào props của component</span>
+  <span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> ({ <span class="hljs-attr">count</span>: state.counter.count }),
+  <span class="hljs-comment">//  đăng ký các hàm sau vào props</span>
+  (dispatch) =&gt; ({
+    <span class="hljs-comment">// gọi action INCREMENT để tăng gía trị count.</span>
+    <span class="hljs-attr">increment</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> dispatch({ <span class="hljs-attr">type</span>: <span class="hljs-string">'INCREMENT'</span> }),
+    <span class="hljs-comment">// gọi action DECREMENT để tăng gía trị count</span>
+    <span class="hljs-attr">decrement</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> dispatch({ <span class="hljs-attr">type</span>: <span class="hljs-string">'DECREMENT'</span> })
+  })
+)(Counter);
+</code></pre>
+<p>Có vẻ phải viết code khá nhiều và nhiều đoạn không tường minh nếu các bạn không nắm được <a href="https://scotch.io/tutorials/getting-to-know-flux-the-react-js-architecture">Flux Architecture</a>. Redux là một biến thể của Flux nên các bạn có thể tham khảo thêm <a href="https://scotch.io/tutorials/getting-to-know-flux-the-react-js-architecture">Flux Architecture</a> nhé. Bây giờ chúng ta thử với Context API thì sao nhé.</p>
+<h2><a class="anchor" aria-hidden="true" id="context-api"></a><a href="#context-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Context API</h2>
+<p>Với Context API bạn cũng cần một nơi để lưu trũ trạng thái của ứng dụng. Tuy nhiên Context API không định nghĩa tất cả vào trong một như Redux. Các bạn có thể quản lý các <code>state</code> khác nhau bằng các <code>context</code> khác nhau. Do đó với mỗi <code>state</code>, các bạn cần định nghĩa một <code>context</code> riêng cho nó.</p>
+<ul>
+<li>Định nghĩa context</li>
+</ul>
+<p><code>src/contexts/counter.js</code></p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CounterContext = React.createContext();
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useCounter = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> useContext(LoadingContext);
+</code></pre>
+<ul>
+<li>Định nghĩa provider để khai báo <code>state</code> và cung cấp các hàm thay đổi giá trị <code>state</code></li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'prop-types'</span>;
+<span class="hljs-keyword">import</span> { CounterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'../../contexts/counter'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CounterProvider</span>(<span class="hljs-params">props</span>) </span>{
+  <span class="hljs-keyword">const</span> [count, setCount] = useState(<span class="hljs-number">0</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CounterContext.Provider</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">count:</span> <span class="hljs-attr">count</span>,
+        <span class="hljs-attr">decrement:</span> () =&gt;</span> setCount(count - 1)
+        increment: () =&gt; setCount(count + 1),
+      }}&gt;
+      {props.children}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">CounterContext.Provider</span>&gt;</span></span>
+  );
+}
+
+CounterContext.propTypes = {
+  <span class="hljs-attr">children</span>: PropTypes.node
+};
+</code></pre>
+<ul>
+<li>Đăng ký <code>CounterProvider</code> trong ứng dụng React</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// render ứng dụng React</span>
+render(
+  <span class="hljs-comment">// kết nối Redux store vào React</span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CounterProvider</span>&gt;</span>
+    {
+      // sử dụng useCounter để lấy giá trị count và các hàm increment, decrement được provider truyển xuống trong giá trị value khai báo ở trên
+    }
+  <span class="hljs-tag">&lt;/<span class="hljs-name">CounterProvider</span>&gt;</span></span>,
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'app-container'</span>)
+);
+</code></pre>
+<ul>
+<li>Sử dụng <code>useCounter</code> trong React Component</li>
+</ul>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Counter</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> [count, increment, decrement] = useCounter();
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> decrement()}&gt;-<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      {count}
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> increment()}&gt;+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+</code></pre>
+<p>Với React Context API mọi thứ trở nên đơn giản hơn bao giờ hết. Bạn vẫn còn dùng Redux chứ? Sau bài này bạn sẽ chuyển sang Context API chứ?</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao">[React] Class Component và Function Component, bạn chọn viết theo cách nào?</a></h1><p class="post-meta">March 6, 2020</p><div class="authorBlock"><p class="post-authorName"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener">Hieu Nguyen</a></p><div class="authorPhoto"><a href="https://twitter.com/hieunv8" target="_blank" rel="noreferrer noopener"><img src="https://graph.facebook.com/100006410080637/picture/?height=200&amp;width=200" alt="Hieu Nguyen"/></a></div></div></header><article class="post-content"><div><span><p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p>
+<p>Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cách nào. Chúng ta cùng bắt đầu nhé.</p>
+<h2><a class="anchor" aria-hidden="true" id="cú-pháp"></a><a href="#cú-pháp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cú pháp</h2>
+<p>Khác nhau đầu tiên giữa <code>Class Component</code> và <code>Function Component</code> thể hiện ngay ở cách khai báo.</p>
+<h3><a class="anchor" aria-hidden="true" id="class-component"></a><a href="#class-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-comment">// phương pháp này bắt buộc phải khai báo hàm để kết xuất mã HTML</span>
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<p>Cách khai báo này khá quen thuộc với các bạn có nền tảng lập trình hướng đối tượng (OOP). Với những bạn mới học React hoặc chuyển sang học React thì phương pháp tiếp cận này có vẻ phù hợp và dễ hiểu.</p>
+<h3><a class="anchor" aria-hidden="true" id="function-component"></a><a href="#function-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// phương pháp xem kết xuất mã HTML như là giá trị trả về của hàm</span>
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Function component sử dụng cách tiếp cận khác đó là sử dụng pure function để khai báo component. Ban đầu function component được sử dụng để viết các component chỉ với mục đích kết xuất HTML mà thôi. Với các component với theo hướng tiếp cận này thì bạn sẽ không can thiệp được vào lifecycle của component. Do đó nó thướng được biết đến với tên gọi Stateless Component.</p>
+<h2><a class="anchor" aria-hidden="true" id="props"></a><a href="#props" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Props</h2>
+<h3><a class="anchor" aria-hidden="true" id="class-component-1"></a><a href="#class-component-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<p><code>props</code> trong Class Component được xem như giá trị truyển vào cho hàm khởi tạo class.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props); <span class="hljs-comment">// bắt buộc phải có dòng này để gọi hàm khởi tạo của class cha nhé</span>
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="function-component-1"></a><a href="#function-component-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<p><code>props</code> trong Function Component thì được xem như là giá trị truyền vào hàm pure function khi định nghĩa component.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params">props</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Định nghĩa <code>defaultProps</code> và <code>propTypes</code> thì không có sự khác biệt giữa Class Component và Function Component.</p>
+<pre><code class="hljs css language-js">TestComponent.defaultProps = {};
+
+TestComponent.propTypes = {};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="state"></a><a href="#state" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>State</h2>
+<p>Trước khi React Hooks ra đời thì như đã nói ở trên Function Component con được biết đến với tên gọi Stateless Component. Nghĩa là nó không có state. Khi React Hooks ra đời thì Function Component cũng có <code>state</code> của riêng nó.</p>
+<h3><a class="anchor" aria-hidden="true" id="class-component-2"></a><a href="#class-component-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Class Component</h3>
+<p><code>state</code> trong Class Component dược định nghĩa như sau:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-comment">// khởi tạo giá trị state</span>
+    <span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">false</span> };
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+  }
+}
+</code></pre>
+<p>Khi muốn thay đổi giá trị <code>state</code> bạn gọi phương thức <code>setState</code> của component:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">this</span>.setState(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> ({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">true</span> }));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="function-component-2"></a><a href="#function-component-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Component</h3>
+<p><code>state</code> trong Function Component được định nghĩa như sau:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TestComponent</span>(<span class="hljs-params">props</span>) </span>{
+  <span class="hljs-comment">// giá trị khởi tạo state được truyền vào trong useState hook</span>
+  <span class="hljs-keyword">const</span> [state, setState] = useState({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">false</span> });
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>TestComponent<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+}
+</code></pre>
+<p>Các bạn để ý hàm <code>useState</code> trả về giá trị của component <code>state</code> trong biến <code>state</code> và hàm <code>setState</code>. Khi muốn thay đổi giá trị của state thì bạn có thể gọi hàm <code>setState</code>.</p>
+<pre><code class="hljs css language-js">setState({ <span class="hljs-attr">isLoading</span>: <span class="hljs-literal">true</span> });
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="component-lifecycle"></a><a href="#component-lifecycle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Component Lifecycle</h2>
+<p>Với Class component các bạn sẽ thấy component lifecycle khá rõ ràng với các hàm như <code>componentDidMount</code>, <code>componentDidUpdate</code>. Function Component thì không như vậy, toàn bộ việc sử lý lifecycle đều thông qua <code>useEffect</code> hook.</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// componentDidMount</span>
+useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}; <span class="hljs-comment">// componentWillUnmount</span>
+}, []);
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// componentDidUpdate</span>
+useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}; <span class="hljs-comment">// componentWillUnmount</span>
+}, [state]);
+</code></pre>
+<p>Như các bạn thấy thì <code>componentDidMount</code> và <code>componentDidUpdate</code> không chỉ định rõ khi nào thì hàm được gọi. Việc gọi hàm thì tự chúng ta hiểu dựa theo lifecycle của React component thôi. Với Function Component và <code>useEffect</code> thì khác, bạn có thể thấy <code>[]</code> và <code>[state]</code> chị định rõ ràng đối tượng phụ thuộc mà khi chúng thay đổi thì hàm truyển vào <code>useEffect</code> sẽ được gọi. Có vẻ như nó lại tường mình hơn là các hàm lifecycle trong class Component.</p>
+<p>Sau sự có mặt của TypeScript thì có lẽ Class Component và React Hooks thì có lẽ bạn Class Component chiếm ưu thế tuyệt đối. Thời điểm đó anh em thi nhau viết Class Component với TypeScript và tôi cũng thế :). Ngay đến cả facebook cũng support TypeScript với create-react-app nữa cơ mà. Thế nhưng khi React Hooks xuất hiện thì có vẻ gió đã đổi chiều, việc xử lý state và lifecycle với hook có vẻ đơn giản hơn rất nhiều. Các bạn thì thấy thế nào. Bạn sẽ chọn cách nào với dự án của mình?</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/posts/blog/">← Prev</a></div></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/posts/" class="nav-home"><img src="/posts/img/favicon.ico" alt="Test Site" width="66" height="58"/></a><div><h5>Docs</h5><a href="/posts/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/posts/docs/en/doc2.html">Guides (or other categories)</a><a href="/posts/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/posts/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/posts/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/posts/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>

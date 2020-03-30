@@ -4,7 +4,7 @@
         <title>Test Site Blog</title>
         <link>https://hieu-nv.github.io/posts/blog</link>
         <description>The best place to stay up-to-date with the latest Test Site news and events.</description>
-        <lastBuildDate>Fri, 20 Mar 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 30 Mar 2020 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -14,53 +14,88 @@
         </image>
         <copyright>Copyright © 2020 Your Name or Your Company Name</copyright>
         <item>
+            <title><![CDATA[[AWS] Remote Debugging ứng dụng Lambda viết bằng Java với Visual Studio Code]]></title>
+            <link>https://hieu-nv.github.io/posts/blog/2020/03/30/aws-remote-debugging-ung-dung-lambda-viet-bang-java-voi-visual-studio-code.html</link>
+            <guid>https://hieu-nv.github.io/posts/blog/2020/03/30/aws-remote-debugging-ung-dung-lambda-viet-bang-java-voi-visual-studio-code.html</guid>
+            <pubDate>Mon, 30 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Debug cũng quan trọng giống như lúc bạn code vậy. Với những bạn làm quen với Lambda thì không phải ai cũng biết làm sao để có thể debug được. Đa phần các bạn sẽ chọn cách in dữ liệu ra màn hình để debug. Hôm nay tôi sẽ hướng dẫn các bạn cách debug ứn...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[[AWS] Serverless và SAM, bạn chọn dùng cái nào?]]></title>
+            <link>https://hieu-nv.github.io/posts/blog/2020/03/22/aws-serverless-va-sam-ban-chon-dung-cai-nao.html</link>
+            <guid>https://hieu-nv.github.io/posts/blog/2020/03/22/aws-serverless-va-sam-ban-chon-dung-cai-nao.html</guid>
+            <pubDate>Sun, 22 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Mình đã viết khá nhiều bài sử dụng Serverless, tại sao mình lại viết bài này. Thực ra mình cũng mới bắt đầu làm AWS Lambda được một thời gian ngắn. Dự án đầu tiên mình làm Lambda thì đã các bạn đi được đã chọn Serverless để phát triển. Dự án thứ hai ...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[[AWS] Phát triển ứng dụng Lambda bằng Java]]></title>
+            <link>https://hieu-nv.github.io/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java.html</link>
+            <guid>https://hieu-nv.github.io/posts/blog/2020/03/22/aws-phat-trien-ung-dung-lambda-bang-java.html</guid>
+            <pubDate>Sun, 22 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Như các bạn đã biết hiện nay môi trường thực thi sử dụng trong Lambda phần lớn đang sử dụng Node hay Python. Tuy nhiên trên thực tế đôi khi bạn cần sử dụng một môi trường thực thi khác như Java chẳng hạn. Trên thực tế thì AWS cũng đang hỗ trợ khá nhi...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[[React] Kết hợp các mẫu lập trình để sử dụng hiệu quả Runtime Type Checking]]></title>
+            <link>https://hieu-nv.github.io/posts/blog/2020/03/21/react-ket-hop-cac-mau-lap-trinh-de-su-dung-hieu-qua-runtime-type-checking.html</link>
+            <guid>https://hieu-nv.github.io/posts/blog/2020/03/21/react-ket-hop-cac-mau-lap-trinh-de-su-dung-hieu-qua-runtime-type-checking.html</guid>
+            <pubDate>Sat, 21 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://s3-ap-southeast-1.amazonaws.com/techover.storage/wp-content/uploads/2020/03/21154244/photo-1484154218962-a197022b5858.jpeg" alt="introduction"></p> <p>Như các bạn đã biết, Static Type Checking giúp chúng ta kiểm soát kiểu dữ liệu tốt hơn khi viết mã nguồn. Các bạn có thể sử dụng Flow hoặc TypeScript đều được. Tuy nhiên khi dữ liệu được liên kết với API chẳng hạn, khi đó bạn không thể kiểm soát đượ...</p>]]></description>
+        </item>
+        <item>
             <title><![CDATA[[React] Static Type Checking là gì? Flow và TypeScript, bạn chọn cách nào?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/20/react-static-type-checking-la-gi-flow-va-typescript-ban-chon-cach-nao.html</guid>
             <pubDate>Fri, 20 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Static Type Checking và Runtime Type Checking là hai thuật ngữ ban đâu cảm giác có vẻ không quen thuộc cho nhưng nó lại lai thứ có lẽ các bạn đang dùng hàng ngày. Như các bạn biết thì JavaScript là ngôn ngữ định kiểu động, nghĩa là kiểu dữ liệu chỉ đ...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p> <p>Static Type Checking và Runtime Type Checking là hai thuật ngữ ban đâu cảm giác có vẻ không quen thuộc cho nhưng nó lại lai thứ có lẽ các bạn đang dùng hàng ngày. Như các bạn biết thì JavaScript là ngôn ngữ định kiểu động, nghĩa là kiểu dữ liệu chỉ ...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[[AWS] Sử dụng API Gateway Lambda Authorizers với JWT như thế nào?]]></title>
+            <link>https://hieu-nv.github.io/posts/blog/2020/03/20/aws-su-dung-api-gateway-lambda-authorizers-voi-jwt-nhu-the-nao.html</link>
+            <guid>https://hieu-nv.github.io/posts/blog/2020/03/20/aws-su-dung-api-gateway-lambda-authorizers-voi-jwt-nhu-the-nao.html</guid>
+            <pubDate>Fri, 20 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Một trọng những vấn đề quan trọng trong các dự án đó là điều khiển quyền truy cập. Với các ứng dụng xây dựng trên nền tảng AWS việc điều khiển truy cập cũng phức tạp hơn. Trong bài viết này tôi sẽ hướng dẫn các bạn cách tôi đã làm để điểu khiển truy ...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[React] Sử dụng mẫu container trong React như thế nào?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/17/react-su-dung-mau-container-trong-react-nhu-the-nao.html</guid>
             <pubDate>Tue, 17 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Chắc hẳn ai cũng biết tới nguyên lý đầu tiên của SOLID đó là trách nhiệm đơn nhất. Nghĩa là mỗi một đối tượng chỉ làm một nhiệm vụ duy nhất. Đơn giản vì với tính đơn nhất chúng ta sẽ dễ dàng kiểm soát mã nguồn hơn (cho cả người code lần người review)...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p> <p>Chắc hẳn ai cũng biết tới nguyên lý đầu tiên của SOLID đó là trách nhiệm đơn nhất. Nghĩa là mỗi một đối tượng chỉ làm một nhiệm vụ duy nhất. Đơn giản vì với tính đơn nhất chúng ta sẽ dễ dàng kiểm soát mã nguồn hơn (cho cả người code lần người review...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[AWS] Lambda và DynamoDB Streams không còn khó nữa!]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/15/aws-lambda-va-dynamodb-streams-khong-con-kho-nua.html</guid>
             <pubDate>Sun, 15 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử ...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1453503795393-c496eee08c98?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2704&amp;q=80" alt="dynamodb streams"></p> <p>Với các ứng dụng hiện nay, việc giao tiếp giữa client và server phổ biến đang sử dụng Rest API. Trong một số trường hợp việc phải để client đợi xử lý là điều không thể chấp nhận được. Do đó để giải quyết vấn đề này thì phần lớn cách giải quyết là sử...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[React] Tôi đã làm toast component như thế nào?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/14/react-toi-da-lam-toast-component-nhu-the-nao.html</guid>
             <pubDate>Sat, 14 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Với bất kỳ ứng dụng nào việc hiển thị thông báo lỗi là không thể thiếu được. Các bạn có thể có rất nhiều cách làm để hiển thị được các thông báo lỗi này. Trong bài viết này tôi xin chia sẻ cách làm của tôi để các bạn cùng tham khảo nhé.</p> <p>Mục đích của ...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p> <p>Với bất kỳ ứng dụng nào việc hiển thị thông báo lỗi là không thể thiếu được. Các bạn có thể có rất nhiều cách làm để hiển thị được các thông báo lỗi này. Trong bài viết này tôi xin chia sẻ cách làm của tôi để các bạn cùng tham khảo nhé.</p> <p>Mục đích của...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[Docker] Docker vs vagrant, tôi đã quản lý container như thế nào?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/11/docker-docker-vs-vagrant-toi-da-quan-ly-container-nhu-the-nao.html</guid>
             <pubDate>Wed, 11 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên t...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2736&amp;q=80" alt="container"></p> <p>Bạn có gặp khó khăn trong việc xây dựng môi trường phát triển ứng dụng không? Mỗi khi bắt đầu một dự án mới, việc cài đặt môi trường phát triển thường tốn khá nhiều thời gian. Do đó việc xây dựng và chia sẻ môi trường phát triển giữa các thành viên ...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[React] Có React Context API rồi, bạn còn dùng Redux không?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/09/react-co-react-context-api-roi-ban-con-dung-redux-khong.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/09/react-co-react-context-api-roi-ban-con-dung-redux-khong.html</guid>
             <pubDate>Mon, 09 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>State Management là một trong những vấn đề tồn tại ở bất kỳ ứng dụng nào viết bằng React. Redux là một trong những công cụ như thế. Nó từng một thời là xu hướng được tất cả các ứng dụng viết bằng React sử dụng. Và mỗi khi nhắc đến React thì người ta ...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p> <p>State Management là một trong những vấn đề tồn tại ở bất kỳ ứng dụng nào viết bằng React. Redux là một trong những công cụ như thế. Nó từng một thời là xu hướng được tất cả các ứng dụng viết bằng React sử dụng. Và mỗi khi nhắc đến React thì người ta...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[[React] Class Component và Function Component, bạn chọn viết theo cách nào?]]></title>
             <link>https://hieu-nv.github.io/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao.html</link>
             <guid>https://hieu-nv.github.io/posts/blog/2020/03/06/react-class-component-va-function-component-ban-chon-viet-theo-cach-nao.html</guid>
             <pubDate>Fri, 06 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo các...</p>]]></description>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b" alt="react"></p> <p>Trong thế giới React thì chắc hẳn ai cũng biết đến Class Component và Function Component. Tuy nhiên có thể có những hiểu nhầm về hai loại component này. Trong bài viết này tôi sẽ thử so sánh hai cách viết này để giúp bạn có thể lựa chọn viết theo cá...</p>]]></description>
         </item>
     </channel>
 </rss>
